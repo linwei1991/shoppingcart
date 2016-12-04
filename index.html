@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="cart.js"></script>
+</head>
+<body ng-app>
+  <div class="container">
+      <div ng-controller="cartController">
+          <div class="table-responsive">
+              <table class="table table-hover" ng-show="data.length">
+                  <thead>
+                  <tr>
+                      <th>产品编号</th>
+                      <th>产品名称</th>
+                      <th>购买数量</th>
+                      <th>产品单价</th>
+                      <th>产品总价</th>
+                      <th>操作</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="item in data">
+                      <td>{{item.id}}</td>
+                      <td>{{item.name}}</td>
+                      <td>
+                          <button type="button" ng-click="reduce(item.id)" class="btn btn-default">-</button>
+                          <input type="text" value="{{item.quantity}}" ng-model="item.quantity">
+                          <button type="button" ng-click="add(item.id)" class="btn btn-default">+</button>
+                      </td>
+                      <td>{{item.price}}</td>
+                      <td>{{item.price*item.quantity}}</td>
+                      <td>
+                          <button type="button" ng-click="remove(item.id)" class="btn btn-danger">删除</button>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>购买总金额</td>
+                      <td>{{totalPrice()}}</td>
+                      <td>购买总数量</td>
+                      <td>{{totalQuantity()}}</td>
+                      <td colspan="2">
+                          <button type="button" ng-click="data={}"  class="btn btn-danger">清空购物车</button>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+              <div ng-show="!data.length">
+                  <p style="text-align:center;font-size:20px;margin:50px 0;">您当前的购物车没有东西</p>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.1.0/angular.min.js"></script>
+
+</body>
+</html>
